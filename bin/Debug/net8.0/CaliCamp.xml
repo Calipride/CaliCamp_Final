@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CaliCamp</name>
+    </assembly>
+    <members>
+        <member name="T:CaliCamp.Models.Dtos.ImageUploadDto">
+            <summary>
+            Data transfer object for uploading images
+            </summary>
+        </member>
+        <member name="P:CaliCamp.Models.Dtos.ImageUploadDto.Base64Image">
+            <summary>
+            The base64 encoded image data. Should include the data URI scheme (e.g., data:image/jpeg;base64,)
+            </summary>
+            <example>data:image/jpeg;base64,/9j/4AAQSkZJRg...</example>
+        </member>
+        <member name="P:CaliCamp.Models.Dtos.ImageUploadDto.FileName">
+            <summary>
+            The name of the image file, including extension
+            </summary>
+            <example>campsite.jpg</example>
+        </member>
+        <member name="P:CaliCamp.Models.Dtos.ImageUploadDto.CampingSpotId">
+            <summary>
+            The ID of the camping spot this image belongs to
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:CaliCamp.Models.Dtos.ImageUploadDto.UploadedBy">
+            <summary>
+            The ID of the user who is uploading the image
+            </summary>
+            <example>1</example>
+        </member>
+        <member name="P:CaliCamp.Models.Dtos.ImageUploadDto.Description">
+            <summary>
+            Optional description of the image
+            </summary>
+            <example>Beautiful view of the campsite</example>
+        </member>
+        <member name="P:CaliCamp.Models.Dtos.ImageUploadDto.File">
+            <summary>
+            The uploaded file (for multipart/form-data uploads)
+            </summary>
+        </member>
+        <member name="T:CaliCamp.Models.Image">
+            <summary>
+            Represents an image associated with a camping spot
+            </summary>
+        </member>
+        <member name="P:CaliCamp.Models.Image.Id">
+            <summary>
+            The unique identifier for the image
+            </summary>
+        </member>
+        <member name="P:CaliCamp.Models.Image.CampingSpotId">
+            <summary>
+            The ID of the camping spot this image belongs to
+            </summary>
+        </member>
+        <member name="P:CaliCamp.Models.Image.Url">
+            <summary>
+            The URL where the image can be accessed
+            </summary>
+        </member>
+        <member name="P:CaliCamp.Models.Image.UploadedBy">
+            <summary>
+            The ID of the user who uploaded the image
+            </summary>
+        </member>
+        <member name="P:CaliCamp.Models.Image.UploadedAt">
+            <summary>
+            The date and time when the image was uploaded
+            </summary>
+        </member>
+        <member name="P:CaliCamp.Models.Image.CampingSpot">
+            <summary>
+            The camping spot this image belongs to
+            </summary>
+        </member>
+        <member name="P:CaliCamp.Models.Image.UploadedByUser">
+            <summary>
+            The user who uploaded the image
+            </summary>
+        </member>
+        <member name="P:CaliCamp.Models.Image.FilePath">
+            <summary>
+            The physical file path of the image on the server
+            </summary>
+        </member>
+    </members>
+</doc>

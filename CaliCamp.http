@@ -1,0 +1,6 @@
+@CaliCamp_HostAddress = http://localhost:7287
+
+GET {{CaliCamp_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

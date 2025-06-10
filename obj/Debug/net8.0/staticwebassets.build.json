@@ -1,0 +1,20 @@
+{
+  "Version": 1,
+  "Hash": "acWYcBkL5wJel66GXdXSWxRxsArYerBek5NqWrNHD+8=",
+  "Source": "CaliCamp",
+  "BasePath": "_content/CaliCamp",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "CaliCamp\\wwwroot",
+      "Source": "CaliCamp",
+      "ContentRoot": "C:\\Users\\layou\\OneDrive\\Bureaublad\\New folder\\CaliCamp-master\\wwwroot\\",
+      "BasePath": "_content/CaliCamp",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [],
+  "Endpoints": []
+}
