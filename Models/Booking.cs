@@ -12,10 +12,8 @@ namespace CaliCamp.Models
         public int NumGuests { get; set; }
         public decimal TotalPrice { get; set; }
 
-        // Relationships
-        public CampingSpot CampingSpot { get; set; } = new CampingSpot(); // Many-to-one relationship with CampingSpot
-        public User User { get; set; } = new User(); // Many-to-one relationship with User
-
-
+        // Relationships - made nullable since they're navigation properties
+        public CampingSpot? CampingSpot { get; set; } // Many-to-one relationship with CampingSpot
+        public User? User { get; set; } // Many-to-one relationship with User
     }
 }

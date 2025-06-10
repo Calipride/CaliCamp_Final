@@ -11,7 +11,7 @@ try
 {
     var builder = WebApplication.CreateBuilder(args);
 
-    // login configured
+    // Configure logging
     builder.Logging.ClearProviders();
     builder.Logging.AddConsole();
     builder.Logging.AddDebug();
@@ -24,12 +24,39 @@ try
 
     logger.LogInformation("Starting application...");
 
+    // Configuration
     builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
     builder.Configuration.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);
 
-    // then i registered core services
+    // Core services
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
+
+    // Configure JWT Authentication
+    var jwtSettings = builder.Configuration.GetSection("Jwt");
+    var key = Encoding.ASCII.GetBytes(jwtSettings["SecretKey"] ?? "defaultSecretKey123!@#");
+    
+    builder.Services.AddAuthentication(x =>
+    {
+        x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(x =>
+    {
+        x.RequireHttpsMetadata = false;
+        x.SaveToken = true;
+        x.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidIssuer = jwtSettings["Issuer"],
+            ValidAudience = jwtSettings["Audience"]
+        };
+    });
+
+    // Swagger Configuration
     builder.Services.AddSwaggerGen(c =>
     {
         c.SwaggerDoc("v1", new OpenApiInfo
@@ -44,30 +71,57 @@ try
             }
         });
 
-       
+        // Add JWT Authentication to Swagger
+        c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+        {
+            Description = "JWT Authorization header using the Bearer scheme.",
+            Name = "Authorization",
+            In = ParameterLocation.Header,
+            Type = SecuritySchemeType.ApiKey,
+            Scheme = "Bearer"
+        });
+
+        c.AddSecurityRequirement(new OpenApiSecurityRequirement
+        {
+            {
+                new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    }
+                },
+                Array.Empty<string>()
+            }
+        });
+
         var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
         var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
         c.IncludeXmlComments(xmlPath);
     });
 
-    // registration for helpers and services
-    builder.Services.AddSingleton<PasswordHelper>();
-    
-    // Register repositories with proper database connection
-    var dbPath = Path.Combine(builder.Environment.ContentRootPath, "MyData.db");
+    // Database configuration
+    var dataDirectory = Path.Combine(builder.Environment.ContentRootPath, "Data");
+    Directory.CreateDirectory(dataDirectory);
+    var dbPath = Path.Combine(dataDirectory, "MyData.db");
     var connectionString = $"Filename={dbPath}; Connection=shared";
     
-    // Register repositories with the same connection string
-    builder.Services.AddSingleton<ICampingSpotRepo>(sp => new CampingSpotRepo(connectionString));
+    // Register all repositories with consistent connection string
     builder.Services.AddSingleton<IUserRepo>(sp => new UserRepo(connectionString));
-    builder.Services.AddSingleton<IAmenityRepo>(sp => new AmenityRepo());
-    builder.Services.AddSingleton<IBookingRepo>(sp => new BookingRepo());
-    builder.Services.AddSingleton<IImageRepo>(sp => new ImageRepo());
-    builder.Services.AddSingleton<ILocationRepo>(sp => new LocationRepo());
-    builder.Services.AddSingleton<IPaymentRepo>(sp => new PaymentRepo());
-    builder.Services.AddSingleton<IReviewRepo>(sp => new ReviewRepo());
+    builder.Services.AddSingleton<IBookingRepo>(sp => new BookingRepo(connectionString));
+    builder.Services.AddSingleton<ICampingSpotRepo>(sp => new CampingSpotRepo(connectionString));
+    builder.Services.AddSingleton<IPaymentRepo>(sp => new PaymentRepo(connectionString));
+    builder.Services.AddSingleton<IReviewRepo>(sp => new ReviewRepo(connectionString));
+    builder.Services.AddSingleton<IAmenityRepo>(sp => new AmenityRepo(connectionString));
+    builder.Services.AddSingleton<IImageRepo>(sp => new ImageRepo(connectionString));
+    builder.Services.AddSingleton<ILocationRepo>(sp => new LocationRepo(connectionString));
 
-   
+    // Register helpers and services
+    builder.Services.AddSingleton<PasswordHelper>();
+    builder.Services.AddScoped<IUserService, UserService>();
+
+    // CORS configuration
     builder.Services.AddCors(options =>
     {
         options.AddPolicy("MyPolicy", policy =>
@@ -79,29 +133,32 @@ try
     });
 
     builder.Services.AddAuthorization();
-    builder.Services.AddDirectoryBrowser();
 
-    logger.LogInformation("Building the application...");
     var app = builder.Build();
 
-    // Ensured the upload directory exists
-    var uploadsPath = Path.Combine(app.Environment.WebRootPath, "uploads");
-    Directory.CreateDirectory(uploadsPath);
+    // Ensure required directories exist
+    Directory.CreateDirectory(Path.Combine(app.Environment.WebRootPath, "uploads"));
+    Directory.CreateDirectory(Path.Combine(app.Environment.WebRootPath, "Data"));
 
-    // Configured the HTTP request pipeline
+    // Configure the HTTP request pipeline
     if (app.Environment.IsDevelopment())
     {
-        logger.LogInformation("Configuring Swagger for development environment");
         app.UseSwagger();
-        app.UseSwaggerUI();
+        app.UseSwaggerUI(c => 
+        {
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "CaliCamp API V1");
+            c.RoutePrefix = "swagger";
+        });
     }
 
     app.UseHttpsRedirection();
     app.UseCors("MyPolicy");
     app.UseStaticFiles();
     app.UseRouting();
+
     app.UseAuthentication();
     app.UseAuthorization();
+
     app.MapControllers();
 
     logger.LogInformation("Starting web server...");

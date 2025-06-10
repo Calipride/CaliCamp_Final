@@ -1,44 +1,108 @@
 ﻿using LiteDB;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ViewEngines;
 using CaliCamp.Models;
 
 namespace CaliCamp.DataAccess
 {
     public class ReviewRepo : IReviewRepo
     {
-        
-            LiteDatabase db = new LiteDatabase(@"data.db");
-            private const string _REVIEWS = "Reviews";
+        private readonly LiteDatabase _db;
+        private const string _REVIEWS = "Reviews";
 
-
-
-            public void Insert(Review review)
+        public ReviewRepo(string connectionString = "Filename=MyData.db; Connection=shared")
+        {
+            try
             {
-                db.GetCollection<Review>(_REVIEWS).Insert(review);
+                _db = new LiteDatabase(connectionString);
             }
-
-            public IEnumerable<Review> GetAll()
+            catch (Exception ex)
             {
-                return db.GetCollection<Review>(_REVIEWS).FindAll();
+                Console.WriteLine($"Error connecting to database: {ex.Message}");
+                throw;
             }
+        }
 
-            public Review GetById(int id)
+        public void Insert(Review review)
+        {
+            try
             {
-                return db.GetCollection<Review>(_REVIEWS).FindById(id);
+                if (review == null) throw new ArgumentNullException(nameof(review));
+                _db.GetCollection<Review>(_REVIEWS).Insert(review);
             }
-
-            public void Update(Review review)
+            catch (Exception ex)
             {
-                db.GetCollection<Review>(_REVIEWS).Update(review);
+                Console.WriteLine($"Error inserting review: {ex.Message}");
+                throw;
             }
+        }
 
-            public void Delete(int id)
+        public IEnumerable<Review> GetAll()
+        {
+            try
             {
-                db.GetCollection<Review>(_REVIEWS).Delete(id);
+                return _db.GetCollection<Review>(_REVIEWS).FindAll().ToList();
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving reviews: {ex.Message}");
+                throw;
+            }
+        }
 
-            // Add more methods for querying, updating, and deleting reviews as needed
+        public Review GetById(int id)
+        {
+            try
+            {
+                var review = _db.GetCollection<Review>(_REVIEWS).FindById(id);
+                if (review == null)
+                {
+                    throw new KeyNotFoundException($"Review with ID {id} not found");
+                }
+                return review;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error retrieving review: {ex.Message}");
+                throw;
+            }
+        }
+
+        public void Update(Review review)
+        {
+            try
+            {
+                if (review == null) throw new ArgumentNullException(nameof(review));
+                var exists = GetById(review.Id) != null;
+                if (!exists)
+                {
+                    throw new KeyNotFoundException($"Review with ID {review.Id} not found");
+                }
+                _db.GetCollection<Review>(_REVIEWS).Update(review);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating review: {ex.Message}");
+                throw;
+            }
+        }
+
+        public void Delete(int id)
+        {
+            try
+            {
+                var exists = GetById(id) != null;
+                if (!exists)
+                {
+                    throw new KeyNotFoundException($"Review with ID {id} not found");
+                }
+                _db.GetCollection<Review>(_REVIEWS).Delete(id);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting review: {ex.Message}");
+                throw;
+            }
+        }
     }
 }
 
