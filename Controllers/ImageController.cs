@@ -23,7 +23,6 @@ namespace CaliCamp.Controllers
             }
         }
 
-        // GET: api/Image
         [HttpGet]
         public IActionResult Get()
         {
@@ -31,7 +30,6 @@ namespace CaliCamp.Controllers
             return Ok(images);
         }
 
-        // GET: api/Image/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -59,14 +57,13 @@ namespace CaliCamp.Controllers
 
             try
             {
-                // Convert base64 to bytes
                 byte[] imageBytes = Convert.FromBase64String(dto.Base64Image);
                 
-                // Generate a unique filename
+                
                 var fileName = $"{Guid.NewGuid()}_{dto.FileName}";
                 var filePath = Path.Combine(_imageDirectory, fileName);
 
-                // Save the file
+                
                 await System.IO.File.WriteAllBytesAsync(filePath, imageBytes);
 
                 var image = new Image
@@ -91,7 +88,6 @@ namespace CaliCamp.Controllers
             }
         }
 
-        // PUT: api/Image/5
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Image image)
         {
@@ -104,7 +100,6 @@ namespace CaliCamp.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Image/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
@@ -114,7 +109,6 @@ namespace CaliCamp.Controllers
                 return NotFound();
             }
 
-            // Delete the file from the server
             if (System.IO.File.Exists(existingImage.FilePath))
             {
                 System.IO.File.Delete(existingImage.FilePath);

@@ -17,7 +17,6 @@ namespace CaliCamp.Controllers
             _campingSpotRepo = campingSpotRepo;
         }
 
-        // GET: api/CampingSpot
         [HttpGet]
         public IActionResult Get()
         {
@@ -25,7 +24,6 @@ namespace CaliCamp.Controllers
             return Ok(campingSpots);
         }
 
-        // GET: api/CampingSpot/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -37,7 +35,6 @@ namespace CaliCamp.Controllers
             return Ok(campingSpot);
         }
 
-        // POST: api/CampingSpot
         [HttpPost]
         public IActionResult Post([FromBody] CampingSpot campingSpot)
         {
@@ -45,7 +42,6 @@ namespace CaliCamp.Controllers
             return CreatedAtAction(nameof(Get), new { id = campingSpot.Id }, campingSpot);
         }
 
-        // PUT: api/CampingSpot/5
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] CampingSpot campingSpot)
         {
@@ -58,7 +54,6 @@ namespace CaliCamp.Controllers
             return NoContent();
         }
 
-        // DELETE: api/CampingSpot/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
@@ -72,8 +67,6 @@ namespace CaliCamp.Controllers
             return NoContent();
         }
 
-
-        // GET: api/CampingSpot/User/5
         [HttpGet("User/{userId}")]
         public IActionResult GetByUserId(int userId)
         {

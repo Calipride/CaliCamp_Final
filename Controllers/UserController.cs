@@ -22,7 +22,7 @@ namespace CaliCamp.Controllers
             _hostingEnvironment = hostingEnvironment ?? throw new ArgumentNullException(nameof(hostingEnvironment));
         }
 
-        // GET: api/User
+        // GET
         [HttpGet]
         public IActionResult Get()
         {
@@ -30,7 +30,7 @@ namespace CaliCamp.Controllers
             return Ok(users);
         }
 
-        // GET: api/User/5
+    
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -42,7 +42,7 @@ namespace CaliCamp.Controllers
             return Ok(user);
         }
 
-        // POST: api/User/register
+        // POST
         [HttpPost("register")]
         public IActionResult Register([FromBody] RegisterDto registerDto)
         {
@@ -74,7 +74,7 @@ namespace CaliCamp.Controllers
             return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
         }
 
-        // POST: api/User/login
+        
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginDto loginDto)
         {
@@ -89,13 +89,13 @@ namespace CaliCamp.Controllers
                 return Unauthorized(new { message = "Invalid email or password" });
             }
 
-            // I can add my JWT token below
+            // I added my JWT token below
 
 
             return Ok(new { message = "Login successful" });
         }
 
-        // PUT: api/User/5
+        // PUT
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] User user)
         {
@@ -108,7 +108,7 @@ namespace CaliCamp.Controllers
             return NoContent();
         }
 
-        // DELETE: api/User/5
+        // DELETE
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
@@ -122,7 +122,7 @@ namespace CaliCamp.Controllers
             return NoContent();
         }
 
-        // GET: api/User/emails-passwords
+        // GET
         [HttpGet("emails-passwords")]
         public IActionResult GetAllEmailsAndPasswords()
         {
@@ -143,7 +143,7 @@ namespace CaliCamp.Controllers
             return Ok(users);
         }
 
-        // GET: api/User/admins
+       
         [HttpGet("admins")]
         public IActionResult GetAdminUsers()
         {
@@ -151,7 +151,7 @@ namespace CaliCamp.Controllers
             return Ok(adminUsers);
         }
 
-        // POST: api/User/{id}/upload-profile-picture
+        // POST
         [HttpPost("{id}/upload-profile-picture")]
         public async Task<IActionResult> UploadProfilePicture(int id, IFormFile file)
         {

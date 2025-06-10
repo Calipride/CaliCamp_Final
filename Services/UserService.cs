@@ -13,21 +13,20 @@ namespace CaliCamp.Services
     public class UserService : IUserService
     {
         private readonly IConfiguration _config;
-        private readonly IUserRepo _userRepo; // Change object to IUserRepository
+        private readonly IUserRepo _userRepo; 
 
         public UserService(IConfiguration config, IUserRepo userRepo)
         {
             _config = config;
-            _userRepo = userRepo; // Assign the injected userRepository
+            _userRepo = userRepo; 
         }
 
         public User Authenticate(string email, string password)
         {
-            var user = _userRepo.GetByEmail(email); // Use the IUserRepository method
-
+            var user = _userRepo.GetByEmail(email); 
             if (user == null || !BCrypt.Net.BCrypt.Verify(password, user.PasswordHash))
             {
-                throw new AuthenticationException("Invalid email or password"); // Throw an exception if authentication fails
+                throw new AuthenticationException("Invalid email or password");
             }
 
             return user;

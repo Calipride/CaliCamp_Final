@@ -15,7 +15,7 @@ namespace CaliCamp.Controllers
             _amenityRepo = amenityRepo;
         }
 
-        // GET: api/Amenity
+        // GET: api
         [HttpGet]
         public IActionResult Get()
         {
@@ -23,7 +23,7 @@ namespace CaliCamp.Controllers
             return Ok(amenities);
         }
 
-        // GET: api/Amenity/5
+        // GET: api
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -35,7 +35,7 @@ namespace CaliCamp.Controllers
             return Ok(amenity);
         }
 
-        // POST: api/Amenity
+        // POST: api
         [HttpPost]
         public IActionResult Post([FromBody] Amenity amenity)
         {
@@ -43,7 +43,7 @@ namespace CaliCamp.Controllers
             return CreatedAtAction(nameof(Get), new { id = amenity.Id }, amenity);
         }
 
-        // PUT: api/Amenity/5
+        // PUT: api
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Amenity amenity)
         {
@@ -56,7 +56,7 @@ namespace CaliCamp.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Amenity/5
+        // DELETE: api
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

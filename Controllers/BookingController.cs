@@ -18,7 +18,7 @@ namespace CaliCamp.Controllers
             _bookingRepo = bookingRepo;
         }
 
-        // GET: api/Booking
+        // GET: api
         [HttpGet]
         public IActionResult Get()
         {
@@ -26,7 +26,7 @@ namespace CaliCamp.Controllers
             return Ok(bookings);
         }
 
-        // GET: api/Booking/5
+        
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -38,20 +38,20 @@ namespace CaliCamp.Controllers
             return Ok(booking);
         }
 
-        // POST: api/Booking
+        
         [HttpPost]
         public IActionResult Post([FromBody] Booking booking)
         {
             if (booking == null || !ModelState.IsValid)
             {
-                return BadRequest(ModelState); // Handle validation errors
+                return BadRequest(ModelState); 
             }
 
             _bookingRepo.Insert(booking);
             return CreatedAtAction(nameof(Get), new { id = booking.Id }, booking);
         }
 
-        // PUT: api/Booking/5
+       
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Booking booking)
         {
@@ -64,7 +64,6 @@ namespace CaliCamp.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Booking/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

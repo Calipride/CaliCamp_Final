@@ -16,15 +16,12 @@ namespace CaliCamp.Controllers
             _locationRepo = locationRepo;
         }
 
-        // GET: api/Location
         [HttpGet]
         public IActionResult Get()
         {
             var locations = _locationRepo.GetAll();
             return Ok(locations);
         }
-
-        // GET: api/Location/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -36,7 +33,7 @@ namespace CaliCamp.Controllers
             return Ok(location);
         }
 
-        // POST: api/Location
+       
         [HttpPost]
         public IActionResult Post([FromBody] Location location)
         {
@@ -44,7 +41,7 @@ namespace CaliCamp.Controllers
             return CreatedAtAction(nameof(Get), new { id = location.Id }, location);
         }
 
-        // PUT: api/Location/5
+       
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Location location)
         {
@@ -57,7 +54,7 @@ namespace CaliCamp.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Location/5
+      
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

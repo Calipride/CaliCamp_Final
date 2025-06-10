@@ -11,7 +11,7 @@ try
 {
     var builder = WebApplication.CreateBuilder(args);
 
-    // Configure logging first
+    // login configured
     builder.Logging.ClearProviders();
     builder.Logging.AddConsole();
     builder.Logging.AddDebug();
@@ -24,11 +24,10 @@ try
 
     logger.LogInformation("Starting application...");
 
-    // Load appsettings.json if needed
     builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
     builder.Configuration.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);
 
-    // Register core services
+    // then i registered core services
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen(c =>
@@ -45,13 +44,13 @@ try
             }
         });
 
-        // Set the comments path for the Swagger JSON and UI
+       
         var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
         var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
         c.IncludeXmlComments(xmlPath);
     });
 
-    // Register helpers and services
+    // registration for helpers and services
     builder.Services.AddSingleton<PasswordHelper>();
     builder.Services.AddSingleton<IUserRepo>(serviceProvider =>
     {
@@ -68,7 +67,7 @@ try
     builder.Services.AddSingleton(typeof(IPaymentRepo), typeof(PaymentRepo));
     builder.Services.AddSingleton(typeof(IReviewRepo), typeof(ReviewRepo));
 
-    // Enable CORS
+   
     builder.Services.AddCors(options =>
     {
         options.AddPolicy("MyPolicy", policy =>
@@ -85,11 +84,11 @@ try
     logger.LogInformation("Building the application...");
     var app = builder.Build();
 
-    // Ensure the upload directory exists
+    // Ensured the upload directory exists
     var uploadsPath = Path.Combine(app.Environment.WebRootPath, "uploads");
     Directory.CreateDirectory(uploadsPath);
 
-    // Configure the HTTP request pipeline
+    // Configured the HTTP request pipeline
     if (app.Environment.IsDevelopment())
     {
         logger.LogInformation("Configuring Swagger for development environment");
