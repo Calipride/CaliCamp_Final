@@ -1,0 +1,29 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\layou\\OneDrive\\Bureaublad\\New folder\\CaliCamp-master\\wwwroot\\User_images\\2_5wamxxxu.hwh.jpg",
+      "PackagePath": "staticwebassets\\User_images\\2_5wamxxxu.hwh.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.CaliCamp.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.CaliCamp.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.CaliCamp.props",
+      "PackagePath": "build\\CaliCamp.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.CaliCamp.props",
+      "PackagePath": "buildMultiTargeting\\CaliCamp.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.CaliCamp.props",
+      "PackagePath": "buildTransitive\\CaliCamp.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

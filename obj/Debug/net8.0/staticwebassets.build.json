@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "acWYcBkL5wJel66GXdXSWxRxsArYerBek5NqWrNHD+8=",
+  "Hash": "4oIiD8UGCqaypoyqYRYZFR/TzTaCNQsyxzNijg4ADAA=",
   "Source": "CaliCamp",
   "BasePath": "_content/CaliCamp",
   "Mode": "Default",
@@ -15,6 +15,111 @@
       "Pattern": "**"
     }
   ],
-  "Assets": [],
-  "Endpoints": []
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\layou\\OneDrive\\Bureaublad\\New folder\\CaliCamp-master\\wwwroot\\User_images\\2_5wamxxxu.hwh.jpg",
+      "SourceId": "CaliCamp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\layou\\OneDrive\\Bureaublad\\New folder\\CaliCamp-master\\wwwroot\\",
+      "BasePath": "_content/CaliCamp",
+      "RelativePath": "User_images/2_5wamxxxu.hwh#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "106zj909ex",
+      "Integrity": "IQCCfPgDgURzbgVM2Wjtrj0yj03cpfIveebKvkpUYB8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\User_images\\2_5wamxxxu.hwh.jpg"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "User_images/2_5wamxxxu.hwh.106zj909ex.jpg",
+      "AssetFile": "C:\\Users\\layou\\OneDrive\\Bureaublad\\New folder\\CaliCamp-master\\wwwroot\\User_images\\2_5wamxxxu.hwh.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1095155"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IQCCfPgDgURzbgVM2Wjtrj0yj03cpfIveebKvkpUYB8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 10 Jun 2025 20:14:42 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "106zj909ex"
+        },
+        {
+          "Name": "label",
+          "Value": "User_images/2_5wamxxxu.hwh.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-IQCCfPgDgURzbgVM2Wjtrj0yj03cpfIveebKvkpUYB8="
+        }
+      ]
+    },
+    {
+      "Route": "User_images/2_5wamxxxu.hwh.jpg",
+      "AssetFile": "C:\\Users\\layou\\OneDrive\\Bureaublad\\New folder\\CaliCamp-master\\wwwroot\\User_images\\2_5wamxxxu.hwh.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1095155"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IQCCfPgDgURzbgVM2Wjtrj0yj03cpfIveebKvkpUYB8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 10 Jun 2025 20:14:42 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-IQCCfPgDgURzbgVM2Wjtrj0yj03cpfIveebKvkpUYB8="
+        }
+      ]
+    }
+  ]
 }

@@ -52,20 +52,20 @@ try
 
     // registration for helpers and services
     builder.Services.AddSingleton<PasswordHelper>();
-    builder.Services.AddSingleton<IUserRepo>(serviceProvider =>
-    {
-        var connectionString = "Filename=MyData.db; Connection=shared";
-        return new UserRepo(connectionString);
-    });
-
-    // Register repositories
-    builder.Services.AddSingleton(typeof(IAmenityRepo), typeof(AmenityRepo));
-    builder.Services.AddSingleton(typeof(IBookingRepo),typeof(BookingRepo));
-    builder.Services.AddSingleton(typeof(ICampingSpotRepo),typeof(CampingSpotRepo));
-    builder.Services.AddSingleton(typeof(IImageRepo),typeof(ImageRepo));
-    builder.Services.AddSingleton(typeof(ILocationRepo), typeof(LocationRepo));
-    builder.Services.AddSingleton(typeof(IPaymentRepo), typeof(PaymentRepo));
-    builder.Services.AddSingleton(typeof(IReviewRepo), typeof(ReviewRepo));
+    
+    // Register repositories with proper database connection
+    var dbPath = Path.Combine(builder.Environment.ContentRootPath, "MyData.db");
+    var connectionString = $"Filename={dbPath}; Connection=shared";
+    
+    // Register repositories with the same connection string
+    builder.Services.AddSingleton<ICampingSpotRepo>(sp => new CampingSpotRepo(connectionString));
+    builder.Services.AddSingleton<IUserRepo>(sp => new UserRepo(connectionString));
+    builder.Services.AddSingleton<IAmenityRepo>(sp => new AmenityRepo());
+    builder.Services.AddSingleton<IBookingRepo>(sp => new BookingRepo());
+    builder.Services.AddSingleton<IImageRepo>(sp => new ImageRepo());
+    builder.Services.AddSingleton<ILocationRepo>(sp => new LocationRepo());
+    builder.Services.AddSingleton<IPaymentRepo>(sp => new PaymentRepo());
+    builder.Services.AddSingleton<IReviewRepo>(sp => new ReviewRepo());
 
    
     builder.Services.AddCors(options =>

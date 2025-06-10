@@ -65,3 +65,4 @@ C:\Users\layou\OneDrive\Bureaublad\New folder\CaliCamp-master\obj\Debug\net8.0\C
 C:\Users\layou\OneDrive\Bureaublad\New folder\CaliCamp-master\obj\Debug\net8.0\CaliCamp.pdb
 C:\Users\layou\OneDrive\Bureaublad\New folder\CaliCamp-master\obj\Debug\net8.0\CaliCamp.genruntimeconfig.cache
 C:\Users\layou\OneDrive\Bureaublad\New folder\CaliCamp-master\obj\Debug\net8.0\ref\CaliCamp.dll
+C:\Users\layou\OneDrive\Bureaublad\New folder\CaliCamp-master\obj\Debug\net8.0\CaliCamp.sourcelink.json

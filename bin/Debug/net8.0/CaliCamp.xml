@@ -44,50 +44,5 @@
             The uploaded file (for multipart/form-data uploads)
             </summary>
         </member>
-        <member name="T:CaliCamp.Models.Image">
-            <summary>
-            Represents an image associated with a camping spot
-            </summary>
-        </member>
-        <member name="P:CaliCamp.Models.Image.Id">
-            <summary>
-            The unique identifier for the image
-            </summary>
-        </member>
-        <member name="P:CaliCamp.Models.Image.CampingSpotId">
-            <summary>
-            The ID of the camping spot this image belongs to
-            </summary>
-        </member>
-        <member name="P:CaliCamp.Models.Image.Url">
-            <summary>
-            The URL where the image can be accessed
-            </summary>
-        </member>
-        <member name="P:CaliCamp.Models.Image.UploadedBy">
-            <summary>
-            The ID of the user who uploaded the image
-            </summary>
-        </member>
-        <member name="P:CaliCamp.Models.Image.UploadedAt">
-            <summary>
-            The date and time when the image was uploaded
-            </summary>
-        </member>
-        <member name="P:CaliCamp.Models.Image.CampingSpot">
-            <summary>
-            The camping spot this image belongs to
-            </summary>
-        </member>
-        <member name="P:CaliCamp.Models.Image.UploadedByUser">
-            <summary>
-            The user who uploaded the image
-            </summary>
-        </member>
-        <member name="P:CaliCamp.Models.Image.FilePath">
-            <summary>
-            The physical file path of the image on the server
-            </summary>
-        </member>
     </members>
 </doc>

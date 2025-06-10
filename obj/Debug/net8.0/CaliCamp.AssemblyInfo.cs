@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CaliCamp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cbd36550dc7a0dbca0c446a5fefdc8e24ff517aa")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+010a9344b880c0307a322d903cbcf22d139caf35")]
 [assembly: System.Reflection.AssemblyProductAttribute("CaliCamp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CaliCamp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
